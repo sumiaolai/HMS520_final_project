@@ -1,14 +1,25 @@
 # HMS520_final_project
 * Team members: Dibbya Biswa, Su-Miao Lai
-* Fotmate: Analyzing a dataset that uses data wrangling and modeling tools in R
+* Format: Analyzing a dataset that uses data wrangling and modeling tools in R
 ---
 ### The overall goal of the project: 
-*  Understand the Monkeypox outbreak by using the the data of cases and deaths by country as of 01 December 2022
+*  Using GBD data to study child mortality
 ---
 ### Detailed plans and timeline:
 * Explore the data 
-* Determine the research questions
+* Determine the research questions 
+  * How does child mortality change over time? 
+    * Region
+       * Country level
+       * GBD Region level
+    * Populations 
+       * Neonatal (ages 0 to 27 days) mortality rate, per 100,000
+       * Postneonatal (ages 28 to 364 days) mortality rate, per 100,000
+       * Mortality rate among children ages 1 to 4.999, per 100,000
+       * Mortality rate among children ages 0 to 4.999, per 100,000
 * Exploratory data analysis
-  * Demonstrate the countries with the most deaths and cases numerically
-* Data visualization 
-  * Demonstrate the countries with the most deaths and cases graphically
+   * Descriptive statistics
+   * Data visualization 
+      * Demonstrate the child mortality trends 
+      * Using Shiny 
+
