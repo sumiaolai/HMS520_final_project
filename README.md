@@ -20,6 +20,6 @@
 * Exploratory data analysis
    * Descriptive statistics
    * Data visualization 
-      * Demonstrate the countries with the most deaths and cases graphically
+      * Demonstrate the child mortality trends
       * Using Shiny 
 
