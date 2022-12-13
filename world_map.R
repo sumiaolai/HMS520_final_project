@@ -68,3 +68,12 @@ plot <- suppressWarnings(figure(width = 800, height = 450, padding_factor = 0) %
                                      hover = c(country, gbdRegion, under5Deaths)))
 widgetframe::frameWidget(plot,width=600,height=400)
 
+
+# --------------------- Linear Regression Model ---------------------------
+# Build a model to investigate the association between under 5 mortality rate 
+# and covariates (education, sdi, water, sanitation) 
+# IV: Under 5 mortality rate
+# DV: education, sdi, water, sanitation
+
+mod <- glm(under5MR ~ education + sdi + water + sanitation, family = gaussian, data = gbd5q0_2010)
+summary(mod)

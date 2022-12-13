@@ -74,3 +74,6 @@ fig <- ggplot(gbd5q0_long, aes(x = year , y = value,  shape = country)) +
 
 ggsave("4mrs_asia_south.png", plot = fig, height = 8, width = 8, units = "in")
 
+
+
+
