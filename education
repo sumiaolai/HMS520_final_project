@@ -1,0 +1,24 @@
+library("shiny")
+library("data.table")
+library("ggplot2")
+library("stringr")
+library("tidyr")
+library("readr")
+library("readxl")
+library("readr")
+library("dplyr")
+library("tidyr")
+library("data.table")
+
+#load data ------
+mort_data <- read.csv("childMortAndCovars.csv")
+View(mort_data)
+
+# Affect of education on mortaliy rate
+mort_data %>% filter(gbdRegion == "Asia, South") %>%
+  ggplot(aes(y = under5MR ,x = education)) +
+  geom_point() +
+  facet_wrap(vars(country))+
+  labs(x = "Education", y = "Mortality Rate for Children under 5 years old") +
+  ggtitle("Affect of Education on Mortality Rate")
+ 
