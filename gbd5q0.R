@@ -33,46 +33,51 @@ gbd5q0 <- read.csv("data/childMortAndCovars.csv")
 #--------------------------Time-series---------------------------- 
 
 # Under 5 mortality rate in South Aisa 1970-2010
-fig <- gbd5q0 %>% filter(gbdRegion == "Asia, South") %>%
+gbd5q0 %>% filter(gbdRegion == "Asia, South") %>%
   ggplot(aes(x = year, y = under5MR)) +
-  geom_point(color = "blue", size = 4) + 
+  geom_line(color = "steelblue", size = 0.2) +
+  geom_point(color="steelblue",  size = 0.5) +
   facet_wrap(vars(country)) +
-  labs(x ="Year", y = "Mortality Rate for Children under 5 years old") 
+  labs(x ="Year", y = "Mortality Rate for Children under 5 years old",
+       title = "Mortality rate among children ages 0 to 4.999, per 100,000 in South Asia, 1970-2010") 
 
-ggsave("under5MR_south_asia.png", plot = fig, height = 15, width = 15, units = "in")
+ggsave("under5MR_south_asia.png", height = 15, width = 15, units = "in")
 
 # Mortality rate at GBD Region 1970-2010
-p <- ggplot(data = gbd5q0,
+ggplot(data = gbd5q0,
             mapping = aes(x = year, y = under5MR)) +
       geom_line(color = "gray70", 
                      mapping = aes(group = country)) + 
       geom_smooth(mapping = aes(group = gbdRegion),
                        se = FALSE) +
-      labs(x = "", y = "Rate per 100,000 population",
+      labs(x = "Year", y = "Rate per 100,000 population",
           title = "Mortality rate among children ages 0 to 4.999, per 100,000 by GBD Region, 1970-2010") +
   facet_wrap(~ reorder(gbdRegion, -under5MR, na.rm = TRUE), nrow  = 3)
 
-ggsave("under5MR.png", plot = p, height = 15, width = 15, units = "in")
+ggsave("under5MR.png", height = 15, width = 15, units = "in")
 
 # MR for 4 populations- neoMR, postneoMR, age1_5MR, under5MR, gbdRegion
 
 gbd5q0_mrs <- gbd5q0 %>% 
-  select(year, country,neoMR, postneoMR, age1_5MR, under5MR, gbdRegion)
+  select(year, country, neoMR, postneoMR, age1_5MR, under5MR, gbdRegion)
+
+colnames(gbd5q0_mrs) <- c("year"="year", "country"="country", "neoMR"="Neonatal Mortality Rate", "postneoMR"="Postneonatal Mortality Rate", "age1_5MR"="Age 1-5 Mortality Rate", "under5MR"="Under 5 Mortality Rate", "gbdRegion"="GBD Region")
+
 
 gbd5q0_long <- pivot_longer(
   gbd5q0_mrs,
-  cols = c("neoMR", "postneoMR", "age1_5MR", "under5MR"),
+  cols = c("Neonatal Mortality Rate", "Postneonatal Mortality Rate", "Age 1-5 Mortality Rate", "Under 5 Mortality Rate"),
   names_to = "MR_group",
-  values_to = "value"
+  values_to = "Mortality Rate"
 )
 
-gbd5q0_long <- gbd5q0_long %>% filter(gbdRegion == "Asia, South" )
+gbd5q0_long <- gbd5q0_long %>% filter(`GBD Region` == "Asia, South" ) 
 
-fig <- ggplot(gbd5q0_long, aes(x = year , y = value,  shape = country)) +
-  geom_point(color="black", fill="white") +
-  facet_wrap(vars(MR_group), nrow = 1)
+ggplot(gbd5q0_long, aes(x = year , y = `Mortality Rate`, shape = country)) +
+  geom_point(color="steelblue",  size = 1) +
+  facet_wrap(vars(MR_group), nrow = 2)
 
-ggsave("4mrs_asia_south.png", plot = fig, height = 8, width = 8, units = "in")
+ggsave("4mrs_asia_south.png", height = 8, width = 10, units = "in")
 
 
 
